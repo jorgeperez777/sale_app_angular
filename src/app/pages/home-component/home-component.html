@@ -1,6 +1,20 @@
+<h1>Lsitado de Productos</h1>
 
-<nav>
-  <a routerLink="/">Inicio</a>
-  <a [routerLink]="['/product', 123]">Product</a>
-</nav>
-<p>home-component works!</p>
+@if (isLoading()) {
+<p>Cargando.....</p>
+}
+@if (error()) {
+<p>{{error()}}</p>
+}
+@if (!isLoading() && !error()) {
+<div>
+  @for (product of products(); track $index) {
+  <a [routerLink]="['/product', product.slug]">
+    <img [src]="product.url_image" [alt]="product.name" />
+    <div>
+      {{product.name}}
+    </div>
+  </a>
+  }
+</div>
+}

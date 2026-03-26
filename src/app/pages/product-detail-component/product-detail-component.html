@@ -1,1 +1,17 @@
-<p>product-detail-component works!</p>
+<h1>Producto: {{product()?.name}}</h1>
+
+@if (isLoading()) {
+<p>Cargando.....</p>
+}
+@if (error()) {
+<p>{{error()}}</p>
+}
+
+@if (!isLoading() && !error() && product()) {
+<div>
+    <img [src]="product()?.url_image" [alt]="product()?.name" />
+    <div>
+        {{product()?.name}}
+    </div>
+</div>
+}
